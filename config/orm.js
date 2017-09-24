@@ -11,19 +11,22 @@ var orm = {
       cb(result);
     });
   },
-}
-  // insertOne: function(/*parameters go here*/) {
-  //   var queryString = "SELECT ?? FROM ?? ORDER BY ?? DESC";
-  //   console.log(queryString);
-  //   connection.query(queryString, [whatToSelect, table, orderCol], function(err, result) {
-  //     console.log(result);
-  //   });
-  // },
-  // updateOne: function(/*parameters go here*/) {
+
+  insertOne: function(table, cb) {
+    var queryString = "SELECT * FROM ?? WHERE ?? = ?";
+    connection.query(queryString, ["burgers", "burger_name"], function(err, result) {
+      if(err) {
+        throw err;
+      }
+      console.log(result);
+    });
+  },
+  // updateOne: function(  ) {
   //   var queryString = "SELECT ??, COUNT(??) AS count FROM ?? LEFT JOIN ?? ON ??.??= ??.id GROUP BY ?? ORDER BY count DESC LIMIT 1";
   //   connection.query(queryString, [tableOneCol, tableOneCol, tableOne, tableTwo, tableTwo, tableTwoForeignKey, tableOne, tableOneCol], function(err, result) {
   //     console.log(result);
   //   });
   // }
-// };
+
+};
 module.exports = orm;

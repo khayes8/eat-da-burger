@@ -6,7 +6,11 @@ var burgers = {
       cb(res);
     });
   },
-
+  insert: function(cb){
+  	orm.inserOne("burgers", function(res){
+  	  cb(res);
+  	});
+}
 }
 
 // orm.insertOne(/*arguments go here*/);
