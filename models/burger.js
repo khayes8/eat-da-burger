@@ -7,14 +7,18 @@ var burgers = {
     });
   },
   insert: function(cb){
-  	orm.inserOne("burgers", function(res){
+  	orm.insertOne("burgers", function(res){
   	  cb(res);
   	});
 }
+
+   // update: function(cb){
+   // 	orm.updateOne("burgers", function(res)){
+   // 	cb(res)	;
+   // 	}
+   // }
+
 }
 
-// orm.insertOne(/*arguments go here*/);
-
-// orm.updateOne(/*arguments go here*/);
 
 module.exports = burgers;
