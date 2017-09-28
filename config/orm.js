@@ -5,34 +5,34 @@ var bodyParser = require('body-parser');
 var orm = {
   all: function(tableInput, cb) {
     var queryString = "SELECT * FROM " + tableInput + ";";
-    connection.query(queryString, function(err, result) {
+    connection.query(queryString, function(err, res) {
       if (err) {
         throw err;
       }
-      cb(result);
+      cb(res);
     });
   },
 
-  insert: function(req, res) {
+  insert: function(table, cb, req) {
     var queryString = "INSERT INTO burgers (burger_name, devoured, date,) VALUES (?, ?, ?)";
-    connection.query(queryString, [req.body.burger_name, req.body.devoured, req.body.date], function(err, result) {
+    connection.query(queryString, [req.body.burger_name, req.body.devoured, req.body.date], function(err, res) {
       if(err) {
         throw err;
       }
-      console.log(result);
+      console.log(res);
       res.redirect("/");
     });
   },
-  updateOne: function(req,res) {
-    var queryString = "UPDATE burgers SET burger_name = ?, devoured = ?, date = ? WHERE id = ?";
-    connection.query(queryString, [req.body.burger_name, req.body.devoured, req.body.date, req.params.id], function(err, result) {
-     if (err) {
-      throw err;
-    }
-    console.log(result);
-    res.redirect("/");
-    });
-  }
+  // updateOne: function(req,res) {
+  //   var queryString = "UPDATE burgers SET burger_name = ?, devoured = ?, date = ? WHERE id = ?";
+  //   connection.query(queryString, [req.body.burger_name, req.body.devoured, req.body.date, req.params.id], function(err, res) {
+  //    if (err) {
+  //     throw err;
+  //   }
+  //   console.log(res);
+  //   res.redirect("/");
+  //   });
+  // }
 
 };
 module.exports = orm;

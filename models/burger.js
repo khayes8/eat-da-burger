@@ -7,7 +7,7 @@ var burgers = {
     });
   },
   insert: function(cb){
-  	orm.insert("burgers", function(res){
+  	orm.insert("burgers", req, function(res){
   	  cb(res);
   	});
 }
