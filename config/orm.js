@@ -19,14 +19,19 @@ var orm = {
         throw err;
       }
       console.log(result);
+      res.redirect("/");
     });
   },
-  // updateOne: function(table, cb) {
-  //   var queryString = "SELECT ??, COUNT(??) AS count FROM ?? LEFT JOIN ?? ON ??.??= ??.id GROUP BY ?? ORDER BY count DESC LIMIT 1";
-  //   connection.query(queryString, [tableOneCol, tableOneCol, tableOne, tableTwo, tableTwo, tableTwoForeignKey, tableOne, tableOneCol], function(err, result) {
-  //     console.log(result);
-  //   });
-  // }
+  updateOne: function(table, cb) {
+    var queryString = "UPDATE burgers SET burger_name = ?, devoured = ?, time = ? WHERE id = ?";
+    connection.query(queryString, [req.body.burger_name, req.body.devoured, req.body.time, req.params.id], function(err, result) {
+     if (err) {
+      throw err;
+    }
+    console.log(result);
+    res.redirect("/");
+    });
+  }
 
 };
 module.exports = orm;
