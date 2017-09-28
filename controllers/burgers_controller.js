@@ -1,11 +1,11 @@
 var express = require("express");
 
-var router = express.Router();
+var app = express();
 
 var burgers = require("../models/burger.js");
 
 
-router.get("/all", function(req, res) {
+app.get("/all", function(req, res) {
   burgers.all(function(data) {
     var hbsObject = {
       burgers: data
@@ -15,14 +15,28 @@ res.render("index", hbsObject);
   });
 });
 
-router.post("/", function(req, res){
-	burgers.insert(["burger_name", "devoured", "date"], [/*request.body.___*/], function(){
-		res.redirect("/");
-	}
-)
-})
-
-// router.put()
+// router.post("/", function(req, res){
+// 	burgers.insert(["burger_name", "devoured", "date"], [req.body.burger_name, req.body.devoured, req.body.date], function(){
+// 		res.redirect("/");
+// 	}
+// )
+// })
 
 
-module.exports = router;
+app.post("/", function(req, res) {
+  burgers.insert([
+    "burger_name", "devoured", "date"
+  ], [
+    req.body.burger_name, req.body.devoured, req.body.date
+  ], function() {
+    res.redirect("/");
+  });
+});
+
+// router.put("/all" function(req, res){
+// 	burgers.updateOne()
+	
+// })
+
+
+module.exports = app;

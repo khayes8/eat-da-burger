@@ -1,4 +1,5 @@
 var connection = require("./connection.js");
+var bodyParser = require('body-parser');
 // Object Relational Mapper (ORM)
 //table data time, burger, devoured, id
 var orm = {
@@ -12,9 +13,9 @@ var orm = {
     });
   },
 
-  insertOne: function(table, cb) {
-    var queryString = "INSERT INTO" + table + "(burger_name, devoured, time,) VALUES (?, ?, ?)";
-    connection.query(queryString, [req.body.burger_name, req.body.devoured, req.body.time], function(err, result) {
+  insert: function(req, res) {
+    var queryString = "INSERT INTO burgers (burger_name, devoured, date,) VALUES (?, ?, ?)";
+    connection.query(queryString, [req.body.burger_name, req.body.devoured, req.body.date], function(err, result) {
       if(err) {
         throw err;
       }
@@ -22,9 +23,9 @@ var orm = {
       res.redirect("/");
     });
   },
-  updateOne: function(table, cb) {
-    var queryString = "UPDATE burgers SET burger_name = ?, devoured = ?, time = ? WHERE id = ?";
-    connection.query(queryString, [req.body.burger_name, req.body.devoured, req.body.time, req.params.id], function(err, result) {
+  updateOne: function(req,res) {
+    var queryString = "UPDATE burgers SET burger_name = ?, devoured = ?, date = ? WHERE id = ?";
+    connection.query(queryString, [req.body.burger_name, req.body.devoured, req.body.date, req.params.id], function(err, result) {
      if (err) {
       throw err;
     }
